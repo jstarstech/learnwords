@@ -24,7 +24,10 @@ export default function MyProgress() {
     <Grid
       container
       width="100%"
-      md={9}
+      xs={12}
+      sm={9}
+      md={12}
+      lg={9}
       m="auto"
       spacing={0}
       sx={{
@@ -33,12 +36,14 @@ export default function MyProgress() {
         borderRadius: "5px",
       }}
     >
-      <Grid md={6}>
+      <Grid xs={12} sm={6}>
         <Stack
           direction="column"
           alignItems="center"
           justifyContent="space-evenly"
-          height="140pt"
+          sx={{
+            height: { xs: "90pt", sm: "140pt" },
+          }}
         >
           <Stack spacing={0} width="80%" direction="column">
             <Box component="span" display="flex" width="100%" mb="6pt">
@@ -70,13 +75,15 @@ export default function MyProgress() {
           </Stack>
         </Stack>
       </Grid>
-      <Grid md={6}>
+      <Grid xs={12} sm={6}>
         <Stack direction="column" alignItems="center" justifyContent="center">
           <Stack
             direction="column"
             alignItems="flex-start"
             justifyContent="space-evenly"
-            height="140pt"
+            sx={{
+              height: { xs: "90pt", sm: "140pt" },
+            }}
           >
             <SelectMyLang selectSize="small" />
 
