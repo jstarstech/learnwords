@@ -97,7 +97,15 @@ export default function Learn() {
       .map((learnWord, index) => (learnWord.stage < 3 ? index : -1))
       .filter((index) => index > -1);
 
-    const nextRandomIdx = indexes[Math.floor(Math.random() * indexes.length)];
+    let nextRandomIdx: number = state.currentIdx;
+
+    if (indexes.length === 1) {
+      nextRandomIdx = indexes[0];
+    } else {
+      while (nextRandomIdx === state.currentIdx) {
+        nextRandomIdx = indexes[Math.floor(Math.random() * indexes.length)];
+      }
+    }
 
     setTimeout(() => {
       stateDispatch({
