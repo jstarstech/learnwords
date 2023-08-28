@@ -168,8 +168,16 @@ export default function App() {
           localStorage.setItem("lang", lang);
         }
 
+        state.wordsStartIdx = 0;
         const _learnWords = getLearnWords(lang, state.wordsStartIdx);
+
+        localStorage.setItem("wordsStartIdx", state.wordsStartIdx.toString());
         localStorage.setItem("learnWords", JSON.stringify(_learnWords));
+
+        // Reset state
+        state.progress = 0;
+        state.currentIdx = 0;
+        state.isFinished = false;
 
         state.learnWords = _learnWords;
         state.currentWord = {
@@ -184,18 +192,23 @@ export default function App() {
       case "getNextLearnWords": {
         const lang = action?.lang ? action.lang : state.lang;
 
+        if (action?.lang) {
+          state.lang = lang;
+          localStorage.setItem("lang", lang);
+        }
+
         state.wordsStartIdx = action.wordsStartIdx + LEARN_WORDS_COUNT;
         const _learnWords = getLearnWords(lang, state.wordsStartIdx);
 
         localStorage.setItem("wordsStartIdx", state.wordsStartIdx.toString());
         localStorage.setItem("learnWords", JSON.stringify(_learnWords));
-        state.learnWords = _learnWords;
 
         // Reset state
         state.progress = 0;
         state.currentIdx = 0;
         state.isFinished = false;
 
+        state.learnWords = _learnWords;
         state.currentWord = {
           word: state.learnWords[state.currentIdx].word[
             state.learnWords[state.currentIdx].stageLang
