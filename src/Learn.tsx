@@ -94,13 +94,7 @@ export default function Learn() {
     }
 
     const indexes = _learnWords
-      .map((learnWord, index) => {
-        if (learnWord.stage < 3) {
-          return index;
-        }
-
-        return -1;
-      })
+      .map((learnWord, index) => (learnWord.stage < 3 ? index : -1))
       .filter((index) => index > -1);
 
     const nextRandomIdx = indexes[Math.floor(Math.random() * indexes.length)];
