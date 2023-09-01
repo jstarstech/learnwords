@@ -23,15 +23,7 @@ export default function MyProgress() {
   return (
     <Grid
       container
-      width="100%"
-      xs={12}
-      sm={9}
-      md={12}
-      lg={9}
-      m="auto"
-      spacing={0}
       sx={{
-        mx: "auto",
         border: "1px dashed gray",
         borderRadius: "5px",
       }}
@@ -86,7 +78,6 @@ export default function MyProgress() {
             }}
           >
             <SelectMyLang selectSize="small" />
-
             <Button
               variant="outlined"
               color="success"
