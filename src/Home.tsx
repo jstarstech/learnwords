@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Grid2/Grid2";
 import { useContext, useState } from "react";
 import MyProgress from "./MyProgress";
 import SelectMyLang from "./SelectMyLang";
@@ -44,10 +44,7 @@ export default function Home() {
         </Typography>
 
         <Grid
-          xs={12}
-          sm={9}
-          md={12}
-          lg={9}
+          size={{ xs: 12, sm: 9, md: 12, lg: 9 }}
           m="auto"
           sx={{
             my: { xs: 2, md: 4, lg: 6 },
@@ -80,10 +77,9 @@ export default function Home() {
           </DialogActions>
         </Dialog>
 
-        <Grid container xs={12} sm={9} md={12} lg={9} m="auto">
+        <Grid container size={{ xs: 12, sm: 9, md: 12, lg: 9 }} m="auto">
           <Grid
-            xs={12}
-            sm={4}
+            size={{ xs: 12, sm: 4 }}
             display="flex"
             order={{ xs: 1, sm: 0 }}
             sx={{ display: "flex", alignItems: "center" }}
@@ -104,8 +100,7 @@ export default function Home() {
             </Button>
           </Grid>
           <Grid
-            xs={12}
-            sm={4}
+            size={{ xs: 12, sm: 4 }}
             order={{ xs: 0, sm: 1 }}
             sx={{ display: "flex", alignItems: "center" }}
           >

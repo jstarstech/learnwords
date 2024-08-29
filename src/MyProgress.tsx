@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Grid2";
 import { useContext } from "react";
 import words from "./Dictionary";
 import SelectMyLang from "./SelectMyLang";
@@ -28,7 +28,7 @@ export default function MyProgress() {
         borderRadius: "5px",
       }}
     >
-      <Grid xs={12} sm={6}>
+      <Grid size={{ xs: 12, sm: 6 }}>
         <Stack
           direction="column"
           alignItems="center"
@@ -67,7 +67,7 @@ export default function MyProgress() {
           </Stack>
         </Stack>
       </Grid>
-      <Grid xs={12} sm={6}>
+      <Grid size={{ xs: 12, sm: 6 }}>
         <Stack direction="column" alignItems="center" justifyContent="center">
           <Stack
             direction="column"

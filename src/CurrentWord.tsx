@@ -3,7 +3,7 @@ import StepConnector from "@mui/material/StepConnector";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Grid2/Grid2";
 import PropTypes from "prop-types";
 import CustomStepIcon from "./CustomStepIcon.jsx";
 
@@ -27,9 +27,11 @@ export default function CurrentWord({ word, stage }: CurrentWordProps) {
       </Typography>
 
       <Grid
-        xs={6}
-        sm={6}
-        md={4}
+        size={{
+          xs: 6,
+          sm: 6,
+          md: 4,
+        }}
         sx={{
           mb: "20pt",
         }}

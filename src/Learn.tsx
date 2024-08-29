@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Grid2/Grid2";
 import { useContext, useMemo, useRef } from "react";
 import AnswerButtons from "./AnswerButtons";
 import { LEARN_ANSWERS_COUNT, LEARN_WORDS_COUNT, LearnWord } from "./App";

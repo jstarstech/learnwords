@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Grid2/Grid2";
 import PropTypes from "prop-types";
 import { useCallback, useEffect, useState } from "react";
 import { LearnWord } from "./App";
@@ -47,7 +47,7 @@ export default function AnswerButtons({
   return (
     <Grid container width="100%" spacing={1} mx={0}>
       {answers.map((answer, index) => (
-        <Grid key={index} xs={4} sm={4} md={4} lg={4}>
+        <Grid key={index} size={{ xs: 4, sm: 4, md: 4, lg: 4 }}>
           <Box
             component="span"
             sx={{
