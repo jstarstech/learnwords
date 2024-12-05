@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid2/Grid2";
 import { ThemeProvider } from "@mui/material/styles";
 import { useReducer } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import words from "./Dictionary.js";
 import Home from "./Home.jsx";
 import Learn from "./Learn.jsx";

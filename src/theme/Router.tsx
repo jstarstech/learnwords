@@ -1,5 +1,4 @@
-import { MemoryRouter } from "react-router-dom";
-import { StaticRouter } from "react-router-dom/server";
+import { MemoryRouter, StaticRouter } from "react-router";
 
 export function Router(props: { children?: React.ReactNode }) {
   const { children } = props;
