@@ -1,4 +1,4 @@
-import { Dispatch, createContext } from 'react';
+import { Dispatch, createContext } from "react";
 import { LearnWord, StateActions } from "./App";
 
 export type CurrentWord = {
@@ -17,7 +17,7 @@ export type State = {
   isFinished: boolean;
 };
 
-const InitialState = {
+const initialState = {
   page: "home",
   lang: "",
   learnWords: [],
@@ -34,4 +34,4 @@ const InitialState = {
 export const StateContext = createContext<{
   state: State;
   stateDispatch: Dispatch<StateActions>;
-}>({ state: InitialState, stateDispatch: () => null });
+}>({ state: initialState, stateDispatch: () => null });
