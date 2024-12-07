@@ -23,9 +23,9 @@ export default function Words() {
       </Typography>
 
       <Stack spacing={2} direction="column" alignItems="center">
-        {state.learnWords.map((word, index) => (
+        {state.learnWords.map((word) => (
           <Box
-            key={index}
+            key={word.word.eng}
             component="span"
             width="100%"
             sx={{
