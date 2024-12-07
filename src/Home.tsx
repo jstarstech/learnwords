@@ -164,7 +164,7 @@ export default function Home() {
           sx={{ my: 2 }}
           href="/learn"
         >
-          Lets get started!
+          Let's get started!
         </Button>
       </Stack>
     </Grid>
