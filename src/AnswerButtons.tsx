@@ -1,16 +1,15 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2/Grid2";
-import PropTypes from "prop-types";
 import { useCallback, useEffect, useState } from "react";
 import { LearnWord } from "./App";
 const numpadNumMap = [6, 7, 8, 3, 4, 5, 0, 1, 2];
 
-type AnswerButtonsProps = {
+interface AnswerButtonsProps {
   answers: LearnWord[];
   rightAnswerIdx: number;
   lang: string;
   handleAnswer: (answer: LearnWord) => void;
-};
+}
 
 export default function AnswerButtons({
   answers,
@@ -101,10 +100,3 @@ export default function AnswerButtons({
     </Grid>
   );
 }
-
-AnswerButtons.propTypes = {
-  answers: PropTypes.array.isRequired,
-  rightAnswerIdx: PropTypes.number.isRequired,
-  lang: PropTypes.string.isRequired,
-  handleAnswer: PropTypes.func.isRequired,
-};

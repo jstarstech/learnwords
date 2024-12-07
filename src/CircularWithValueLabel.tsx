@@ -3,7 +3,6 @@ import CircularProgress, {
   CircularProgressProps,
 } from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
-import PropTypes from "prop-types";
 
 export default function CircularProgressWithLabel(
   props: CircularProgressProps & { valueLabel: string }
@@ -48,8 +47,3 @@ export default function CircularProgressWithLabel(
     </Box>
   );
 }
-
-CircularProgressWithLabel.propTypes = {
-  value: PropTypes.number.isRequired,
-  valueLabel: PropTypes.string.isRequired,
-};

@@ -1,8 +1,6 @@
 import Brightness1SharpIcon from "@mui/icons-material/Brightness1Sharp";
 import RadioButtonUncheckedSharpIcon from "@mui/icons-material/RadioButtonUncheckedSharp";
-import { StepIconProps } from "@mui/material/StepIcon";
 import { styled } from "@mui/material/styles";
-import PropTypes from "prop-types";
 
 const CustomStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
   ({ theme, ownerState }) => ({
@@ -13,7 +11,21 @@ const CustomStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
   })
 );
 
-export default function CustomStepIcon(props: StepIconProps) {
+interface CustomStepIconProps {
+  /**
+   * Whether this step is active.
+   * @default false
+   */
+  active?: boolean;
+  className?: string;
+  /**
+   * Mark the step as completed. Is passed to child components.
+   * @default false
+   */
+  completed?: boolean;
+}
+
+export default function CustomStepIcon(props: CustomStepIconProps) {
   const { active, completed, className } = props;
 
   return (
@@ -22,17 +34,3 @@ export default function CustomStepIcon(props: StepIconProps) {
     </CustomStepIconRoot>
   );
 }
-
-CustomStepIcon.propTypes = {
-  /**
-   * Whether this step is active.
-   * @default false
-   */
-  active: PropTypes.bool,
-  className: PropTypes.string,
-  /**
-   * Mark the step as completed. Is passed to child components.
-   * @default false
-   */
-  completed: PropTypes.bool,
-};

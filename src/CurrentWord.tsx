@@ -4,13 +4,12 @@ import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2/Grid2";
-import PropTypes from "prop-types";
 import CustomStepIcon from "./CustomStepIcon.jsx";
 
-type CurrentWordProps = {
+interface CurrentWordProps {
   word: string;
   stage: number;
-};
+}
 
 export default function CurrentWord({ word, stage }: CurrentWordProps) {
   const steps = ["1", "2", "3"];
@@ -59,8 +58,3 @@ export default function CurrentWord({ word, stage }: CurrentWordProps) {
     </Grid>
   );
 }
-
-CurrentWord.propTypes = {
-  word: PropTypes.string.isRequired,
-  stage: PropTypes.number.isRequired,
-};
