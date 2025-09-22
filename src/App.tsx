@@ -1,4 +1,4 @@
-import Grid from "@mui/material/Grid2/Grid2";
+import { Grid } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { useReducer } from "react";
 import { Route, Routes } from "react-router";

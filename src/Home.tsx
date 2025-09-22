@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid2/Grid2";
+import { Grid } from "@mui/material";
 import { useContext, useState } from "react";
 import MyProgress from "./MyProgress";
 import SelectMyLang from "./SelectMyLang";

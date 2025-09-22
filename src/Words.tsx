@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid2/Grid2";
+import { Grid } from "@mui/material";
 import { useContext } from "react";
 import CircularProgressWithLabel from "./CircularWithValueLabel";
 import { StateContext } from "./State.js";

@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid2/Grid2";
+import { Grid } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { LearnWord } from "./App";
 const numpadNumMap = [6, 7, 8, 3, 4, 5, 0, 1, 2];

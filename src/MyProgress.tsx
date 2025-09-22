@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid2";
+import { Grid } from "@mui/material";
 import { useContext } from "react";
 import words from "./Dictionary";
 import SelectMyLang from "./SelectMyLang";

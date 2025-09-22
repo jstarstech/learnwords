@@ -3,7 +3,7 @@ import StepConnector from "@mui/material/StepConnector";
 import StepLabel from "@mui/material/StepLabel";
 import Stepper from "@mui/material/Stepper";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid2/Grid2";
+import { Grid } from "@mui/material";
 import CustomStepIcon from "./CustomStepIcon.jsx";
 
 interface CurrentWordProps {
