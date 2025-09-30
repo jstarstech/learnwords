@@ -1,9 +1,7 @@
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
-import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { useContext, useMemo, useRef } from "react";
@@ -135,43 +133,53 @@ export default function Learn() {
   if (state.isFinished) {
     return (
       <Grid width="100%">
-        <Stack
-          spacing={4}
-          direction="column"
-          justifyContent="flex-start"
-          alignItems="center"
-          sx={{
-            mt: { xs: 4, md: 6, lg: 8 },
-          }}
-        >
-          <Typography component="h1" variant="h2" color="text.primary">
-            Well done
-          </Typography>
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-400 to-purple-600 p-4">
+          <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-10 max-w-md w-full text-center">
+            <h1 className="text-3xl font-bold text-gray-800 mb-6">
+              Well done!
+            </h1>
 
-          <CheckCircleOutlineIcon
-            color="success"
-            display="flex"
-            sx={{ fontSize: 80 }}
-          />
+            <div className="flex justify-center mb-6">
+              <div className="bg-green-100 rounded-full p-4 inline-block">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-12 w-12 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+              </div>
+            </div>
 
-          <Button
-            variant="outlined"
-            color="success"
-            size="large"
-            onClick={() =>
-              stateDispatch({
-                type: "getNextLearnWords",
-                wordsStartIdx: state.wordsStartIdx,
-              })
-            }
-          >
-            Learn next words
-          </Button>
+            <div className="space-y-4">
+              <Button
+                className="cursor-pointer w-full mt-8 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all"
+                onClick={() =>
+                  stateDispatch({
+                    type: "getNextLearnWords",
+                    wordsStartIdx: state.wordsStartIdx,
+                  })
+                }
+              >
+                Learn next words
+              </Button>
 
-          <Button variant="outlined" color="success" size="large" href="/">
-            Home
-          </Button>
-        </Stack>
+              <Button
+                className="flex items-center w-full space-x-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg  transition-all"
+                href="/"
+              >
+                Home
+              </Button>
+            </div>
+          </div>
+        </div>
       </Grid>
     );
   }
