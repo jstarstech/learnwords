@@ -178,61 +178,64 @@ export default function Learn() {
 
   return (
     <Grid width="100%">
-      <CurrentWord
-        word={state.currentWord.word}
-        stage={state.currentWord.stage}
-      />
+      <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-4">
+        <div className="max-w-2xl mx-auto">
+          <CurrentWord
+            word={state.currentWord.word}
+            stage={state.currentWord.stage}
+          />
 
-      <AnswerButtons
-        answers={answers}
-        rightAnswerIdx={state.currentIdx}
-        lang={
-          state.learnWords[state.currentIdx].stageLang === "eng"
-            ? state.lang
-            : "eng"
-        }
-        handleAnswer={handleAnswer}
-      />
+          <AnswerButtons
+            answers={answers}
+            rightAnswerIdx={state.currentIdx}
+            lang={
+              state.learnWords[state.currentIdx].stageLang === "eng"
+                ? state.lang
+                : "eng"
+            }
+            handleAnswer={handleAnswer}
+          />
 
-      <Typography
-        variant="subtitle1"
-        textAlign="center"
-        mt={2}
-        mb={1}
-        sx={{ width: "100%" }}
-      >
-        {state.progress.toString()}%
-      </Typography>
+          <div className="bg-white rounded-2xl shadow-xl p-8 mt-6 mb-6">
+            <Typography
+              variant="subtitle1"
+              textAlign="center"
+              mt={0}
+              mb={1}
+              sx={{ width: "100%" }}
+            >
+              {state.progress.toString()}%
+            </Typography>
+            <LinearProgress
+              variant="determinate"
+              color="success"
+              sx={{ width: "100%" }}
+              value={state.progress}
+            />
+          </div>
 
-      <LinearProgress
-        variant="determinate"
-        color="success"
-        sx={{ width: "100%" }}
-        value={state.progress}
-      />
+          <Box
+            display="flex"
+            sx={{ my: 2, justifyContent: "flex-start", width: "100%" }}
+          >
+            <Button
+              className="flex items-center space-x-2 bg-white text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all"
+              startIcon={<ArrowBackIosNewIcon />}
+              href="/"
+            >
+              Home
+            </Button>
 
-      <Box
-        display="flex"
-        sx={{ my: 2, justifyContent: "flex-start", width: "100%" }}
-      >
-        <Button
-          variant="outlined"
-          color="success"
-          startIcon={<ArrowBackIosNewIcon />}
-          href="/"
-        >
-          Home
-        </Button>
-
-        <Button
-          variant="outlined"
-          color="success"
-          sx={{ ml: "auto", alignSelf: "flex-end" }}
-          href="/words"
-        >
-          Words
-        </Button>
-      </Box>
+            <Button
+              className="bg-white text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all"
+              sx={{ ml: "auto", alignSelf: "flex-end" }}
+              href="/words"
+            >
+              Words
+            </Button>
+          </Box>
+        </div>
+      </div>
     </Grid>
   );
 }
