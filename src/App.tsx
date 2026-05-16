@@ -5,29 +5,20 @@ import { Route, Routes } from "react-router";
 import words from "./Dictionary.js";
 import Home from "./Home.jsx";
 import Learn from "./Learn.jsx";
-import { CurrentWord, State, StateContext } from "./State.js";
+import { State, StateContext } from "./State.js";
 import Words from "./Words.jsx";
 import WordsLearned from "./WordsLearned.js";
+import {
+  CurrentWord,
+  LearnWord,
+  LEARN_WORDS_COUNT,
+  calculateProgress,
+  getLearnWords,
+} from "./lib/learning";
 import Router from "./theme/Router.js";
 import { theme } from "./theme/theme.js";
 
 export const DEAFULT_LANG = "ua";
-export const LEARN_WORDS_COUNT = 10;
-export const LEARN_ANSWERS_COUNT = 8; // Start from 0
-
-export type Word = {
-  [key: string]: string;
-  eng: string;
-  ua: string;
-  ru: string;
-};
-
-export type LearnWord = {
-  idx: number;
-  stageLang: string;
-  stage: number;
-  word: Word;
-};
 
 type ChangedWord = { type: "changedWord"; learnWord: LearnWord };
 type GetLearnWords = { type: "getLearnWords"; lang?: string };
@@ -56,23 +47,6 @@ export type StateActions =
   | SetLang
   | SetPage;
 
-function getLearnWords(lang: string, startIdx: number): LearnWord[] {
-  const _learnWords: LearnWord[] = [];
-
-  for (const [index, word] of Object.entries(
-    words.slice(startIdx, startIdx + LEARN_WORDS_COUNT)
-  )) {
-    _learnWords.push({
-      idx: Number(index),
-      stageLang: lang,
-      stage: -1,
-      word,
-    });
-  }
-
-  return _learnWords;
-}
-
 export default function App() {
   const [state, stateDispatch] = useReducer(stateReducer, null, (): State => {
     const lang = localStorage.getItem("lang") || DEAFULT_LANG;
@@ -91,7 +65,7 @@ export default function App() {
       ) as LearnWord[] | null;
 
       if (storedLearnWords === null) {
-        const freshLearnWords = getLearnWords(lang, wordsStartIdx);
+        const freshLearnWords = getLearnWords(words, lang, wordsStartIdx);
         localStorage.setItem("learnWords", JSON.stringify(freshLearnWords));
         return freshLearnWords;
       }
@@ -102,13 +76,7 @@ export default function App() {
     let currentIdx = learnWords.findIndex((learnWord) => learnWord.stage < 3);
     currentIdx = currentIdx > -1 ? currentIdx : 0;
 
-    const totalStageSum = learnWords.reduce((total, learnWord) => {
-      return total + (learnWord.stage === -1 ? 0 : learnWord.stage);
-    }, 0);
-
-    const progress = Math.round(
-      (100 * totalStageSum) / (LEARN_WORDS_COUNT * 3)
-    );
+    const progress = calculateProgress(learnWords);
 
     const currentWord = {
       stage: learnWords[currentIdx].stage,
@@ -167,7 +135,7 @@ export default function App() {
         }
 
         state.wordsStartIdx = 0;
-        const _learnWords = getLearnWords(lang, state.wordsStartIdx);
+        const _learnWords = getLearnWords(words, lang, state.wordsStartIdx);
 
         localStorage.setItem("wordsStartIdx", state.wordsStartIdx.toString());
         localStorage.setItem("learnWords", JSON.stringify(_learnWords));
@@ -196,7 +164,7 @@ export default function App() {
         }
 
         state.wordsStartIdx = action.wordsStartIdx + LEARN_WORDS_COUNT;
-        const _learnWords = getLearnWords(lang, state.wordsStartIdx);
+        const _learnWords = getLearnWords(words, lang, state.wordsStartIdx);
 
         localStorage.setItem("wordsStartIdx", state.wordsStartIdx.toString());
         localStorage.setItem("learnWords", JSON.stringify(_learnWords));

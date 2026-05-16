@@ -6,32 +6,15 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { useContext, useMemo, useRef } from "react";
 import AnswerButtons from "./AnswerButtons";
-import { LEARN_ANSWERS_COUNT, LEARN_WORDS_COUNT, LearnWord } from "./App";
+import {
+  LEARN_ANSWERS_COUNT,
+  LearnWord,
+  calculateProgress,
+  seededRandom,
+  shuffleAnswers,
+} from "./lib/learning";
 import CurrentWord from "./CurrentWord";
 import { StateContext } from "./State";
-
-function seededRandom(seed: number) {
-  let value = seed | 0;
-  value ^= value << 13;
-  value ^= value >>> 17;
-  value ^= value << 5;
-
-  return (value >>> 0) / 4294967296;
-}
-
-function shuffleAnswers<T>(items: T[], seed: number) {
-  const result = [...items];
-  let nextSeed = seed || 1;
-
-  for (let index = result.length - 1; index > 0; index -= 1) {
-    nextSeed = (nextSeed * 1664525 + 1013904223) >>> 0;
-    const swapIndex = nextSeed % (index + 1);
-
-    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
-  }
-
-  return result;
-}
 
 export default function Learn() {
   const { state, stateDispatch } = useContext(StateContext);
@@ -84,12 +67,7 @@ export default function Learn() {
       _learnWords[state.currentIdx].stage = -1;
     }
 
-    const totalStageSum = _learnWords.reduce((total, learnWord) => {
-      return total + (learnWord.stage === -1 ? 0 : learnWord.stage);
-    }, 0);
-    const _progress = Math.round(
-      (100 * totalStageSum) / (LEARN_WORDS_COUNT * 3)
-    );
+    const _progress = calculateProgress(_learnWords);
     stateDispatch({
       type: "setProgress",
       progress: _progress,

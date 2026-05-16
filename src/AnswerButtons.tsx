@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { LearnWord } from "./App";
+import { LearnWord } from "./lib/learning";
 const numpadNumMap = [6, 7, 8, 3, 4, 5, 0, 1, 2];
 
 interface AnswerButtonsProps {

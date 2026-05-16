@@ -5,7 +5,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { Grid } from "@mui/material";
 import { useContext, useState } from "react";
-import { LearnWord } from "./App.js";
+import { LearnWord } from "./lib/learning";
 import CircularProgressWithLabel from "./CircularWithValueLabel";
 import words from "./Dictionary.js";
 import { StateContext } from "./State.js";

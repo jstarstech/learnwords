@@ -1,10 +1,6 @@
 import { Dispatch, createContext } from "react";
-import { LearnWord, StateActions } from "./App";
-
-export type CurrentWord = {
-  stage: number;
-  word: string;
-};
+import { CurrentWord, LearnWord } from "./lib/learning";
+import { StateActions } from "./App";
 
 export type State = {
   page: string;
