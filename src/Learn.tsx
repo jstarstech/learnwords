@@ -10,7 +10,7 @@ import {
   LEARN_ANSWERS_COUNT,
   LearnWord,
   calculateProgress,
-  seededRandom,
+  pickAnswerInsertIndex,
   shuffleAnswers,
 } from "./lib/learning";
 import CurrentWord from "./CurrentWord";
@@ -29,9 +29,7 @@ export default function Learn() {
       seed
     ).slice(0, LEARN_ANSWERS_COUNT);
 
-    const insertAt = Math.floor(
-      seededRandom(seed + 1) * (_answers.length + 1)
-    );
+    const insertAt = pickAnswerInsertIndex(seed + 1, _answers.length);
 
     _answers.splice(insertAt, 0, currentWord);
 

@@ -50,6 +50,13 @@ export function seededRandom(seed: number) {
   return (value >>> 0) / 4294967296;
 }
 
+export function pickAnswerInsertIndex(seed: number, answerCount: number) {
+  const mixedSeed = (seed ^ (seed >>> 16)) >>> 0;
+  const nextSeed = (mixedSeed * 1664525 + 1013904223) >>> 0;
+
+  return nextSeed % (answerCount + 1);
+}
+
 export function shuffleAnswers<T>(items: T[], seed: number) {
   const result = [...items];
   let nextSeed = seed || 1;

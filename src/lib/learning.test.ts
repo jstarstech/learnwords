@@ -3,6 +3,7 @@ import {
   LEARN_WORDS_COUNT,
   calculateProgress,
   getLearnWords,
+  pickAnswerInsertIndex,
   seededRandom,
   shuffleAnswers,
   type Word,
@@ -50,5 +51,13 @@ describe("learning helpers", () => {
   it("returns a stable seeded random value", () => {
     expect(seededRandom(123)).toBeCloseTo(seededRandom(123));
     expect(seededRandom(123)).not.toBe(seededRandom(124));
+  });
+
+  it("picks different answer insert positions for nearby seeds", () => {
+    expect(pickAnswerInsertIndex(309, 8)).not.toBe(
+      pickAnswerInsertIndex(310, 8)
+    );
+    expect(pickAnswerInsertIndex(309, 8)).toBeGreaterThanOrEqual(0);
+    expect(pickAnswerInsertIndex(309, 8)).toBeLessThanOrEqual(8);
   });
 });
