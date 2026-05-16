@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
 import { Grid } from "@mui/material";
 import { useContext } from "react";
 import words from "./Dictionary";
@@ -15,9 +16,11 @@ export default function MyProgress() {
     state.learnWords.reduce(
       (total, learnWord) => (learnWord.stage === 3 ? total + 1 : total),
       0
-    );
+  );
 
   const totalProgress = Math.round((countCurrent / words.length) * 100);
+  const hasCompletedWords = countCurrent > state.wordsStartIdx;
+  const showHint = !hasCompletedWords && state.progress > 0;
 
   return (
     <>
@@ -76,7 +79,10 @@ export default function MyProgress() {
                 </Stack>
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
-                <Stack direction="column" sx={{ alignItems: "center", justifyContent: "center" }}>
+                <Stack
+                  direction="column"
+                  sx={{ alignItems: "center", justifyContent: "center" }}
+                >
                   <Stack
                     direction="column"
                     sx={{
@@ -85,15 +91,39 @@ export default function MyProgress() {
                       height: { xs: "90pt", sm: "140pt" },
                     }}
                   >
-                    <Button
-                      variant="outlined"
-                      color="success"
-                      size="medium"
-                      href="/wordsLearned"
-                      disabled={countCurrent === 0}
+                    <Tooltip
+                      title={
+                        showHint ? (
+                          <Box sx={{ whiteSpace: "pre-line" }}>
+                            You have learning in progress,
+                            {"\n"}but no completed words yet.
+                          </Box>
+                        ) : (
+                          ""
+                        )
+                      }
+                      placement="top"
+                      arrow
+                      disableInteractive
                     >
-                      Words learned
-                    </Button>
+                      <Box
+                        sx={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          width: "fit-content",
+                        }}
+                      >
+                        <Button
+                          variant="outlined"
+                          color="success"
+                          size="medium"
+                          href="/wordsLearned"
+                          disabled={!hasCompletedWords}
+                        >
+                          Words learned
+                        </Button>
+                      </Box>
+                    </Tooltip>
                   </Stack>
                 </Stack>
               </Grid>
