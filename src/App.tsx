@@ -56,6 +56,23 @@ export type StateActions =
   | SetLang
   | SetPage;
 
+function getLearnWords(lang: string, startIdx: number): LearnWord[] {
+  const _learnWords: LearnWord[] = [];
+
+  for (const [index, word] of Object.entries(
+    words.slice(startIdx, startIdx + LEARN_WORDS_COUNT)
+  )) {
+    _learnWords.push({
+      idx: Number(index),
+      stageLang: lang,
+      stage: -1,
+      word,
+    });
+  }
+
+  return _learnWords;
+}
+
 export default function App() {
   const [state, stateDispatch] = useReducer(stateReducer, null, (): State => {
     const lang = localStorage.getItem("lang") || DEAFULT_LANG;
@@ -68,21 +85,19 @@ export default function App() {
       localStorage.setItem("wordsStartIdx", wordsStartIdx.toString());
     }
 
-    let learnWords: LearnWord[] = [];
-
-    {
-      const _learnWords = JSON.parse(
+    const learnWords: LearnWord[] = (() => {
+      const storedLearnWords = JSON.parse(
         localStorage.getItem("learnWords") || "null"
-      );
+      ) as LearnWord[] | null;
 
-      if (_learnWords === null) {
-        learnWords = getLearnWords(lang, wordsStartIdx);
-
-        localStorage.setItem("learnWords", JSON.stringify(learnWords));
-      } else {
-        learnWords = _learnWords;
+      if (storedLearnWords === null) {
+        const freshLearnWords = getLearnWords(lang, wordsStartIdx);
+        localStorage.setItem("learnWords", JSON.stringify(freshLearnWords));
+        return freshLearnWords;
       }
-    }
+
+      return storedLearnWords;
+    })();
 
     let currentIdx = learnWords.findIndex((learnWord) => learnWord.stage < 3);
     currentIdx = currentIdx > -1 ? currentIdx : 0;
@@ -113,23 +128,6 @@ export default function App() {
       isFinished,
     };
   });
-
-  function getLearnWords(lang: string, startIdx: number): LearnWord[] {
-    const _learnWords: LearnWord[] = [];
-
-    for (const [index, word] of Object.entries(
-      words.slice(startIdx, startIdx + LEARN_WORDS_COUNT)
-    )) {
-      _learnWords.push({
-        idx: Number(index),
-        stageLang: lang,
-        stage: -1,
-        word,
-      });
-    }
-
-    return _learnWords;
-  }
 
   function stateReducer(state: State, action: StateActions): State {
     switch (action.type) {

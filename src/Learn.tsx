@@ -10,20 +10,47 @@ import { LEARN_ANSWERS_COUNT, LEARN_WORDS_COUNT, LearnWord } from "./App";
 import CurrentWord from "./CurrentWord";
 import { StateContext } from "./State";
 
+function seededRandom(seed: number) {
+  let value = seed | 0;
+  value ^= value << 13;
+  value ^= value >>> 17;
+  value ^= value << 5;
+
+  return (value >>> 0) / 4294967296;
+}
+
+function shuffleAnswers<T>(items: T[], seed: number) {
+  const result = [...items];
+  let nextSeed = seed || 1;
+
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    nextSeed = (nextSeed * 1664525 + 1013904223) >>> 0;
+    const swapIndex = nextSeed % (index + 1);
+
+    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+  }
+
+  return result;
+}
+
 export default function Learn() {
   const { state, stateDispatch } = useContext(StateContext);
 
   const answers = useMemo(() => {
-    const _answers = state.learnWords
-      .filter((_predicate, index) => index !== state.currentIdx)
-      .sort(() => Math.random() - 0.5)
-      .slice(0, LEARN_ANSWERS_COUNT);
+    const currentWord = state.learnWords[state.currentIdx];
+    const seed =
+      state.currentIdx + state.learnWords.length * 31 + currentWord.stage * 17;
 
-    _answers.splice(
-      ((_answers.length + 1) * Math.random()) | 0,
-      0,
-      state.learnWords[state.currentIdx]
+    const _answers = shuffleAnswers(
+      state.learnWords.filter((_predicate, index) => index !== state.currentIdx),
+      seed
+    ).slice(0, LEARN_ANSWERS_COUNT);
+
+    const insertAt = Math.floor(
+      seededRandom(seed + 1) * (_answers.length + 1)
     );
+
+    _answers.splice(insertAt, 0, currentWord);
 
     return _answers;
   }, [state.currentIdx, state.learnWords]);
@@ -194,6 +221,7 @@ export default function Learn() {
           />
 
           <AnswerButtons
+            key={state.currentIdx}
             answers={answers}
             rightAnswerIdx={state.currentIdx}
             lang={

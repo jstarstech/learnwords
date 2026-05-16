@@ -32,10 +32,6 @@ export default function AnswerButtons({
   );
 
   useEffect(() => {
-    setAnswerClickedIdx(-1);
-  }, [answers]);
-
-  useEffect(() => {
     document.addEventListener("keydown", handleKeyPress);
 
     return () => {
