@@ -59,7 +59,7 @@ export default function SelectMyLang() {
                 state.lang === "ru"
                   ? "border-blue-500 bg-blue-50 text-blue-700"
                   : "border-gray-300 hover:border-gray-400"
-              }"`}
+              }`}
               value={"ru"}
               onClick={() => handleSelectLang("ru")}
             >
