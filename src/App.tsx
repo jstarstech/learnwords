@@ -114,75 +114,77 @@ export default function App() {
         };
       }
       case "changedWord": {
-        state.learnWords = state.learnWords.map((t) => {
-          if (t.idx === action.learnWord.idx) {
-            return action.learnWord;
-          }
+        const learnWords = state.learnWords.map((t) =>
+          t.idx === action.learnWord.idx ? action.learnWord : t
+        );
 
-          return t;
-        });
+        localStorage.setItem("learnWords", JSON.stringify(learnWords));
 
-        localStorage.setItem("learnWords", JSON.stringify(state.learnWords));
-
-        return { ...state };
+        return {
+          ...state,
+          learnWords,
+        };
       }
       case "getLearnWords": {
         const lang = action?.lang ? action.lang : state.lang;
+        const wordsStartIdx = 0;
+        const learnWords = getLearnWords(words, lang, wordsStartIdx);
 
         if (action?.lang) {
-          state.lang = lang;
           localStorage.setItem("lang", lang);
         }
 
-        state.wordsStartIdx = 0;
-        const _learnWords = getLearnWords(words, lang, state.wordsStartIdx);
+        localStorage.setItem("wordsStartIdx", wordsStartIdx.toString());
+        localStorage.setItem("learnWords", JSON.stringify(learnWords));
 
-        localStorage.setItem("wordsStartIdx", state.wordsStartIdx.toString());
-        localStorage.setItem("learnWords", JSON.stringify(_learnWords));
-
-        // Reset state
-        state.progress = 0;
-        state.currentIdx = 0;
-        state.isFinished = false;
-
-        state.learnWords = _learnWords;
-        state.currentWord = {
-          word: state.learnWords[state.currentIdx].word[
-            state.learnWords[state.currentIdx].stageLang
-          ],
-          stage: state.learnWords[state.currentIdx].stage,
+        return {
+          ...state,
+          lang,
+          wordsStartIdx,
+          learnWords,
+          currentIdx: 0,
+          currentWord: {
+            word: learnWords[0].word[learnWords[0].stageLang],
+            stage: learnWords[0].stage,
+          },
+          progress: 0,
+          isFinished: false,
         };
-
-        return { ...state };
       }
       case "getNextLearnWords": {
         const lang = action?.lang ? action.lang : state.lang;
+        const nextWordsStartIdx = action.wordsStartIdx + LEARN_WORDS_COUNT;
 
         if (action?.lang) {
-          state.lang = lang;
           localStorage.setItem("lang", lang);
         }
 
-        state.wordsStartIdx = action.wordsStartIdx + LEARN_WORDS_COUNT;
-        const _learnWords = getLearnWords(words, lang, state.wordsStartIdx);
+        if (nextWordsStartIdx >= words.length) {
+          return {
+            ...state,
+            lang,
+            isFinished: true,
+          };
+        }
 
-        localStorage.setItem("wordsStartIdx", state.wordsStartIdx.toString());
-        localStorage.setItem("learnWords", JSON.stringify(_learnWords));
+        const learnWords = getLearnWords(words, lang, nextWordsStartIdx);
 
-        // Reset state
-        state.progress = 0;
-        state.currentIdx = 0;
-        state.isFinished = false;
+        localStorage.setItem("wordsStartIdx", nextWordsStartIdx.toString());
+        localStorage.setItem("learnWords", JSON.stringify(learnWords));
 
-        state.learnWords = _learnWords;
-        state.currentWord = {
-          word: state.learnWords[state.currentIdx].word[
-            state.learnWords[state.currentIdx].stageLang
-          ],
-          stage: state.learnWords[state.currentIdx].stage,
+        return {
+          ...state,
+          lang,
+          wordsStartIdx: nextWordsStartIdx,
+          learnWords,
+          currentIdx: 0,
+          currentWord: {
+            word: learnWords[0].word[learnWords[0].stageLang],
+            stage: learnWords[0].stage,
+          },
+          progress: 0,
+          isFinished: false,
         };
-
-        return { ...state };
       }
       case "setCurrentIdx": {
         return {
