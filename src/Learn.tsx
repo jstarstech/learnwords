@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
-import { useContext, useMemo, useRef } from "react";
+import { useContext, useEffect, useMemo, useRef } from "react";
 import AnswerButtons from "./AnswerButtons";
 import {
   LEARN_ANSWERS_COUNT,
@@ -37,6 +37,15 @@ export default function Learn() {
   }, [state.currentIdx, state.learnWords]);
 
   const handleNextAnswer = useRef(true);
+  const answerTimeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (answerTimeoutRef.current !== null) {
+        clearTimeout(answerTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleAnswer = (answer: LearnWord) => {
     if (!handleNextAnswer.current) {
@@ -44,6 +53,10 @@ export default function Learn() {
     }
 
     handleNextAnswer.current = false;
+
+    if (answerTimeoutRef.current !== null) {
+      clearTimeout(answerTimeoutRef.current);
+    }
 
     let timeoutMs = 1000; // 1000 - right answer
 
@@ -77,7 +90,7 @@ export default function Learn() {
     });
 
     if (_progress === 100) {
-      setTimeout(() => {
+      answerTimeoutRef.current = setTimeout(() => {
         stateDispatch({
           type: "setIsFinished",
           isFinished: true,
@@ -89,6 +102,7 @@ export default function Learn() {
         });
 
         handleNextAnswer.current = true;
+        answerTimeoutRef.current = null;
       }, timeoutMs);
 
       return;
@@ -108,7 +122,7 @@ export default function Learn() {
       }
     }
 
-    setTimeout(() => {
+    answerTimeoutRef.current = setTimeout(() => {
       stateDispatch({
         type: "changedWord",
         learnWord: _learnWords[state.currentIdx],
@@ -130,6 +144,7 @@ export default function Learn() {
       });
 
       handleNextAnswer.current = true;
+      answerTimeoutRef.current = null;
     }, timeoutMs);
   };
 
