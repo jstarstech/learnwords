@@ -1,7 +1,9 @@
 {
-  "name": "vite-project",
+  "name": "learnwords",
   "private": true,
-  "version": "0.0.0",
+  "description": "Browser-based vocabulary trainer for learning English words with local progress tracking.",
+  "version": "0.1.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
