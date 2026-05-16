@@ -32,7 +32,7 @@ export default function CurrentWord({ word, stage }: CurrentWordProps) {
           >
             {steps.map((label) => (
               <Step key={label}>
-                <StepLabel StepIconComponent={CustomStepIcon}></StepLabel>
+                <StepLabel slots={{ stepIcon: CustomStepIcon }} />
               </Step>
             ))}
           </Stepper>

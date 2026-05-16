@@ -21,7 +21,7 @@ export default function MyProgress() {
 
   return (
     <>
-      <Grid width="100%">
+      <Grid sx={{ width: "100%" }}>
         <div className="mx-auto max-w-2xl py-4 sm:py-8 lg:pt-16">
           <div className="bg-white rounded-2xl shadow-2xl p-8  w-full text-center">
             <h1 className="text-2xl font-bold text-gray-800 mb-8">
@@ -39,16 +39,16 @@ export default function MyProgress() {
               <Grid size={{ xs: 12, sm: 6 }}>
                 <Stack
                   direction="column"
-                  alignItems="center"
-                  justifyContent="space-evenly"
                   sx={{
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
                     height: { xs: "90pt", sm: "140pt" },
                   }}
                 >
-                  <Stack spacing={0} width="80%" direction="column">
-                    <Box component="span" display="flex" width="100%" mb="6pt">
+                  <Stack spacing={0} direction="column" sx={{ width: "80%" }}>
+                    <Box sx={{ display: "flex", width: "100%", mb: "6pt" }}>
                       Current progress
-                      <Box component="span" ml="auto" color="#a5a5a5">
+                      <Box sx={{ ml: "auto", color: "#a5a5a5" }}>
                         {state.progress}%
                       </Box>
                     </Box>
@@ -59,10 +59,10 @@ export default function MyProgress() {
                       value={state.progress}
                     />
                   </Stack>
-                  <Stack spacing={0} width="80%" direction="column">
-                    <Box component="span" display="flex" width="100%" mb="6pt">
+                  <Stack spacing={0} direction="column" sx={{ width: "80%" }}>
+                    <Box sx={{ display: "flex", width: "100%", mb: "6pt" }}>
                       Total progress
-                      <Box component="span" ml="auto" color="#a5a5a5">
+                      <Box sx={{ ml: "auto", color: "#a5a5a5" }}>
                         {countCurrent} / {words.length}
                       </Box>
                     </Box>
@@ -76,16 +76,12 @@ export default function MyProgress() {
                 </Stack>
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
-                <Stack
-                  direction="column"
-                  alignItems="center"
-                  justifyContent="center"
-                >
+                <Stack direction="column" sx={{ alignItems: "center", justifyContent: "center" }}>
                   <Stack
                     direction="column"
-                    alignItems="flex-start"
-                    justifyContent="space-evenly"
                     sx={{
+                      alignItems: "flex-start",
+                      justifyContent: "space-evenly",
                       height: { xs: "90pt", sm: "140pt" },
                     }}
                   >

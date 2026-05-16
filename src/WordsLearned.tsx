@@ -43,7 +43,7 @@ export default function WordsLearned() {
   const _wordsLearned = wordsLearned.slice(offset, offset + perPage);
 
   return (
-    <Grid width="100%">
+    <Grid sx={{ width: "100%" }}>
       <div className="min-h-screen bg-gradient-to-br from-teal-500 to-blue-600 p-4">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white rounded-2xl shadow-xl p-6">
@@ -51,36 +51,30 @@ export default function WordsLearned() {
               Words learned
             </h2>
 
-            <Stack spacing={2} direction="column" alignItems="center">
+            <Stack spacing={2} direction="column" sx={{ alignItems: "center" }}>
               {_wordsLearned.map((word, index) => (
                 <Box
                   key={index}
-                  component="span"
-                  width="100%"
                   sx={{
+                    width: "100%",
                     py: 2,
                     px: 2,
                     border: "1px dashed gray",
                     borderRadius: "5px",
                     transition: "background 0.5s",
+                    display: "flex",
+                    alignItems: "center",
                     "&:hover": {
                       backgroundColor: "#ededed",
                     },
                   }}
-                  display="flex"
-                  alignItems="center"
                 >
                   <CircularProgressWithLabel
                     value={(100 * (word.stage === -1 ? 0 : word.stage)) / 3}
                     valueLabel={(word.stage === -1 ? 0 : word.stage).toString()}
                   />
                   {word.word.eng}
-                  <Box
-                    component="span"
-                    display="flex"
-                    ml="auto"
-                    color="#a5a5a5"
-                  >
+                  <Box sx={{ display: "flex", ml: "auto", color: "#a5a5a5" }}>
                     {word.word[state.lang]}
                   </Box>
                 </Box>
@@ -94,7 +88,7 @@ export default function WordsLearned() {
               />
             </Stack>
 
-            <Box display="flex" sx={{ my: 2, width: "100%" }}>
+            <Box sx={{ display: "flex", my: 2, width: "100%" }}>
               <Button
                 className="flex items-center space-x-2 bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-600 transition-all"
                 href="/"

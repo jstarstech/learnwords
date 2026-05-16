@@ -159,7 +159,7 @@ export default function Learn() {
 
   if (state.isFinished) {
     return (
-      <Grid width="100%">
+      <Grid sx={{ width: "100%" }}>
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-400 to-purple-600 p-4">
           <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-10 max-w-md w-full text-center">
             <h1 className="text-3xl font-bold text-gray-800 mb-6">
@@ -176,9 +176,9 @@ export default function Learn() {
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M5 13l4 4L19 7"
                   />
                 </svg>
@@ -212,7 +212,7 @@ export default function Learn() {
   }
 
   return (
-    <Grid width="100%">
+    <Grid sx={{ width: "100%" }}>
       <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600 p-4">
         <div className="max-w-2xl mx-auto">
           <CurrentWord
@@ -235,10 +235,8 @@ export default function Learn() {
           <div className="bg-white rounded-2xl shadow-xl p-8 mt-6 mb-6">
             <Typography
               variant="subtitle1"
-              textAlign="center"
-              mt={0}
-              mb={1}
-              sx={{ width: "100%" }}
+              align="center"
+              sx={{ width: "100%", mt: 0, mb: 1 }}
             >
               {state.progress.toString()}%
             </Typography>
@@ -250,10 +248,7 @@ export default function Learn() {
             />
           </div>
 
-          <Box
-            display="flex"
-            sx={{ my: 2, justifyContent: "flex-start", width: "100%" }}
-          >
+          <Box sx={{ display: "flex", my: 2, justifyContent: "flex-start", width: "100%" }}>
             <Button
               className="flex items-center space-x-2 bg-white text-gray-800 font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all"
               startIcon={<ArrowBackIosNewIcon />}

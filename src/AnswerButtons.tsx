@@ -42,10 +42,9 @@ export default function AnswerButtons({
   return (
     <Grid
       container
-      width="100%"
       spacing={1}
-      mx={0}
       className="bg-white rounded-2xl shadow-xl p-4"
+      sx={{ width: "100%", mx: 0 }}
     >
       {answers.map((answer, index) => (
         <Grid key={index} size={{ xs: 4, sm: 4, md: 4, lg: 4 }}>
@@ -62,9 +61,11 @@ export default function AnswerButtons({
             {numpadNumMap[Number(index)] + 1}
           </Box>
           <Box
-            component="span"
             sx={{
               py: 4,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
               cursor: "pointer",
               border: "1px dashed gray",
               borderRadius: "5px",
@@ -80,15 +81,12 @@ export default function AnswerButtons({
                   border: "1px dashed green",
                   backgroundColor: "#e5ffe2",
                 }),
-              ...(answerClickedIdx === answer.idx &&
+                ...(answerClickedIdx === answer.idx &&
                 answer.idx !== rightAnswerIdx && {
                   border: "1px dashed #ff0000",
                   backgroundColor: "#fceaea",
                 }),
             }}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
             onClick={(e) => {
               e.preventDefault();
               setAnswerClickedIdx(answer.idx);

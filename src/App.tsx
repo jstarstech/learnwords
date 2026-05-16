@@ -255,7 +255,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StateContext.Provider value={{ state, stateDispatch }}>
-        <Grid m="auto" size={{ xs: 11, sm: 11, md: 9 }} container>
+        <Grid container size={{ xs: 11, sm: 11, md: 9 }} sx={{ m: "auto" }}>
           <Router>
             <Routes>
               <Route index path="/" element={<Home />} />

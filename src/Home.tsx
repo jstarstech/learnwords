@@ -27,7 +27,7 @@ export default function Home() {
 
     return (
       <>
-        <Grid width={"100%"}>
+        <Grid sx={{ width: "100%" }}>
           <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600">
             <div className="container m-auto grid grid-cols-1">
               <div className="mx-auto max-w-2xl py-4 sm:py-8 lg:pt-16">
@@ -98,7 +98,7 @@ export default function Home() {
   }
 
   return (
-    <Grid width={"100%"}>
+    <Grid sx={{ width: "100%" }}>
       <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600">
         <div className="container m-auto grid grid-cols-1">
           <div className="mx-auto max-w-2xl py-4 sm:py-8 lg:pt-16">
