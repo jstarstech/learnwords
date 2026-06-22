@@ -6,8 +6,10 @@ import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { useContext, useEffect, useMemo, useRef } from "react";
 import AnswerButtons from "./AnswerButtons";
+import words from "./Dictionary.js";
 import {
   LEARN_ANSWERS_COUNT,
+  LEARN_WORDS_COUNT,
   LearnWord,
   calculateProgress,
   pickAnswerInsertIndex,
@@ -149,13 +151,22 @@ export default function Learn() {
   };
 
   if (state.isFinished) {
+    const allWordsLearned =
+      state.wordsStartIdx + LEARN_WORDS_COUNT >= words.length;
+
     return (
       <Grid sx={{ width: "100%" }}>
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-400 to-purple-600 p-4">
           <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg p-10 max-w-md w-full text-center">
             <h1 className="text-3xl font-bold text-gray-800 mb-6">
-              Well done!
+              {allWordsLearned ? "All words learned!" : "Well done!"}
             </h1>
+
+            {allWordsLearned && (
+              <p className="text-lg text-gray-600 mb-6">
+                You have learned all {words.length} words.
+              </p>
+            )}
 
             <div className="flex justify-center mb-6">
               <div className="bg-green-100 rounded-full p-4 inline-block">
@@ -177,17 +188,19 @@ export default function Learn() {
             </div>
 
             <div className="space-y-4">
-              <Button
-                className="cursor-pointer w-full mt-8 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all"
-                onClick={() =>
-                  stateDispatch({
-                    type: "getNextLearnWords",
-                    wordsStartIdx: state.wordsStartIdx,
-                  })
-                }
-              >
-                Learn next words
-              </Button>
+              {!allWordsLearned && (
+                <Button
+                  className="cursor-pointer w-full mt-8 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold py-4 px-6 rounded-lg hover:from-green-600 hover:to-green-700 transform hover:scale-105 transition-all"
+                  onClick={() =>
+                    stateDispatch({
+                      type: "getNextLearnWords",
+                      wordsStartIdx: state.wordsStartIdx,
+                    })
+                  }
+                >
+                  Learn next words
+                </Button>
+              )}
 
               <Button
                 className="flex items-center w-full space-x-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg  transition-all"
