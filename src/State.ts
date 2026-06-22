@@ -1,18 +1,7 @@
 import { Dispatch, createContext } from "react";
-import { CurrentWord, LearnWord } from "./lib/learning";
-import { StateActions } from "./App";
+import { State, StateActions } from "./lib/state";
 
-export type State = {
-  lang: string;
-  learnWords: LearnWord[];
-  wordsStartIdx: number;
-  currentIdx: number;
-  currentWord: CurrentWord;
-  progress: number;
-  isFinished: boolean;
-};
-
-const initialState = {
+const initialState: State = {
   lang: "",
   learnWords: [],
   wordsStartIdx: 0,
