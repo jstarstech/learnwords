@@ -52,9 +52,9 @@ export default function WordsLearned() {
             </h2>
 
             <Stack spacing={2} direction="column" sx={{ alignItems: "center" }}>
-              {_wordsLearned.map((word, index) => (
+              {_wordsLearned.map((word) => (
                 <Box
-                  key={index}
+                  key={word.word.eng}
                   sx={{
                     width: "100%",
                     py: 2,

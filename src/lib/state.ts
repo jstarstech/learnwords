@@ -8,6 +8,7 @@ import {
 } from "./learning";
 
 export const DEFAULT_LANG = "ua";
+export const SUPPORTED_LANGS = ["ua", "ru"];
 
 export type State = {
   lang: string;
@@ -45,7 +46,11 @@ export type StateActions =
   | SetLang;
 
 export function createInitialState(words: Word[]): State {
-  const lang = localStorage.getItem("lang") || DEFAULT_LANG;
+  const storedLang = localStorage.getItem("lang");
+  const lang =
+    storedLang && SUPPORTED_LANGS.includes(storedLang)
+      ? storedLang
+      : DEFAULT_LANG;
 
   let wordsStartIdx = 0;
 

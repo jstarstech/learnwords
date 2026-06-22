@@ -41,6 +41,14 @@ describe("createInitialState", () => {
     expect(localStorage.getItem("wordsStartIdx")).toBe("0");
   });
 
+  it("falls back to the default language when the stored one is unsupported", () => {
+    localStorage.setItem("lang", "fr");
+
+    const state = createInitialState(fixtureWords);
+
+    expect(state.lang).toBe(DEFAULT_LANG);
+  });
+
   it("restores a valid stored learn set and derives progress", () => {
     const stored = getLearnWords(fixtureWords, "ua", 0);
     stored[0].stage = 3;
