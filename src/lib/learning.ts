@@ -38,7 +38,7 @@ export function calculateProgress(learnWords: LearnWord[]): number {
     return total + (learnWord.stage === -1 ? 0 : learnWord.stage);
   }, 0);
 
-  return Math.round((100 * totalStageSum) / (LEARN_WORDS_COUNT * 3));
+  return Math.round((100 * totalStageSum) / (learnWords.length * 3));
 }
 
 export function seededRandom(seed: number) {

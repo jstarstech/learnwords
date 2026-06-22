@@ -21,6 +21,10 @@ export default function AnswerButtons({
 
   const handleKeyPress = useCallback(
     (event: KeyboardEvent) => {
+      if (answerClickedIdx !== -1) {
+        return;
+      }
+
       const _answerIndex = numpadNumMap.indexOf(Number(event.key) - 1);
 
       if (_answerIndex !== -1) {
@@ -28,7 +32,7 @@ export default function AnswerButtons({
         handleAnswer(answers[_answerIndex]);
       }
     },
-    [answers, handleAnswer]
+    [answers, handleAnswer, answerClickedIdx]
   );
 
   useEffect(() => {
@@ -89,6 +93,9 @@ export default function AnswerButtons({
             }}
             onClick={(e) => {
               e.preventDefault();
+              if (answerClickedIdx !== -1) {
+                return;
+              }
               setAnswerClickedIdx(answer.idx);
               handleAnswer(answer);
             }}

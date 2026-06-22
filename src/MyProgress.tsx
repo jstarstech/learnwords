@@ -19,7 +19,7 @@ export default function MyProgress() {
   );
 
   const totalProgress = Math.round((countCurrent / words.length) * 100);
-  const hasCompletedWords = countCurrent > state.wordsStartIdx;
+  const hasCompletedWords = countCurrent > 0;
   const showHint = !hasCompletedWords && state.progress > 0;
 
   return (

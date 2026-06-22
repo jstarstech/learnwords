@@ -3,7 +3,6 @@ import { CurrentWord, LearnWord } from "./lib/learning";
 import { StateActions } from "./App";
 
 export type State = {
-  page: string;
   lang: string;
   learnWords: LearnWord[];
   wordsStartIdx: number;
@@ -14,7 +13,6 @@ export type State = {
 };
 
 const initialState = {
-  page: "home",
   lang: "",
   learnWords: [],
   wordsStartIdx: 0,

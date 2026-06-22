@@ -49,7 +49,6 @@ export default function SelectMyLang() {
                   ? "border-blue-500 bg-blue-50 text-blue-700"
                   : "border-gray-300 hover:border-gray-400"
               }`}
-              value={"ua"}
               onClick={() => handleSelectLang("ua")}
             >
               Ukrainian
@@ -60,7 +59,6 @@ export default function SelectMyLang() {
                   ? "border-blue-500 bg-blue-50 text-blue-700"
                   : "border-gray-300 hover:border-gray-400"
               }`}
-              value={"ru"}
               onClick={() => handleSelectLang("ru")}
             >
               Russian

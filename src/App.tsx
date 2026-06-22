@@ -18,7 +18,7 @@ import {
 import Router from "./theme/Router.js";
 import { theme } from "./theme/theme.js";
 
-export const DEAFULT_LANG = "ua";
+export const DEFAULT_LANG = "ua";
 
 type ChangedWord = { type: "changedWord"; learnWord: LearnWord };
 type GetLearnWords = { type: "getLearnWords"; lang?: string };
@@ -33,7 +33,6 @@ type SetCurrentWordStage = { type: "setCurrentWordStage"; stage: number };
 type SetProgress = { type: "setProgress"; progress: number };
 type SetIsFinished = { type: "setIsFinished"; isFinished: boolean };
 type SetLang = { type: "setLang"; lang: string };
-type SetPage = { type: "setPage"; page: string };
 
 export type StateActions =
   | ChangedWord
@@ -44,12 +43,11 @@ export type StateActions =
   | SetCurrentWordStage
   | SetProgress
   | SetIsFinished
-  | SetLang
-  | SetPage;
+  | SetLang;
 
 export default function App() {
   const [state, stateDispatch] = useReducer(stateReducer, null, (): State => {
-    const lang = localStorage.getItem("lang") || DEAFULT_LANG;
+    const lang = localStorage.getItem("lang") || DEFAULT_LANG;
 
     let wordsStartIdx = 0;
 
@@ -64,8 +62,10 @@ export default function App() {
         localStorage.getItem("learnWords") || "null"
       ) as LearnWord[] | null;
 
-      if (storedLearnWords === null) {
+      if (!Array.isArray(storedLearnWords) || storedLearnWords.length === 0) {
+        wordsStartIdx = 0;
         const freshLearnWords = getLearnWords(words, lang, wordsStartIdx);
+        localStorage.setItem("wordsStartIdx", wordsStartIdx.toString());
         localStorage.setItem("learnWords", JSON.stringify(freshLearnWords));
         return freshLearnWords;
       }
@@ -86,7 +86,6 @@ export default function App() {
     const isFinished = progress === 100;
 
     return {
-      page: "home",
       lang,
       learnWords,
       wordsStartIdx,
@@ -99,12 +98,6 @@ export default function App() {
 
   function stateReducer(state: State, action: StateActions): State {
     switch (action.type) {
-      case "setPage": {
-        return {
-          ...state,
-          page: action.page,
-        };
-      }
       case "setLang": {
         localStorage.setItem("lang", action.lang);
 
