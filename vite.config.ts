@@ -8,7 +8,7 @@ export default defineConfig({
   build: {
     rolldownOptions: {
       output: {
-        advancedChunks: {
+        codeSplitting: {
           groups: [{ name: "mui", test: /node_modules\/@mui/ }],
         },
       },
